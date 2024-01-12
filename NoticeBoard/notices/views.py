@@ -3,7 +3,6 @@ from django.http import HttpResponse
 
 # Create your views here.
 def notices(request):
-    return HttpResponse('This is home page')
+    context = {'title':'College', 'site_name':'Notices'}
+    return render(request, 'home.html', context)
 
-def home(request):
-    return render(request, 'home.html')

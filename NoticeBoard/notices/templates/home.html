@@ -1,20 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-{% load static %}
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-    
-</head>
-<body>
-    <h1>This is Home page</h1>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis, ipsam, 
-        illo unde iusto rerum tenetur nihil dolore recusandae nostrum dolores magnam illum nobis ipsa asperiores 
-        aliquam delectus quam minus. Dolore?</p>
-</body>
-<script src="{% static 'js/script.js' %}"></script>
+{% block title %}
+    {{title}} - {{site_name}}
+{% endblock %}
 
-</html>
+{% block content %}
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-body">
+                <h1 class="card-title">Notices</h1>
+                <p class="card-text">Today's notice: Classes started at 11:00 PM.</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
