@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
-from .models import User
+from django.http import HttpResponse
+from .models import Student
 from django.contrib import messages
+from notices.urls import *
 
 # Create your views here.
 def register(request):
@@ -10,14 +12,10 @@ def register(request):
         email = request.POST.get('email')
         password1 = request.POST.get('password1')
         password2 = request.POST.get('password2')
-        try:
-            user = User.objects.create(name=username, email=email, password=password1)
-            login(request, user)
-            messages.success(request, 'Registration successful. You are now logged in.')
-            return redirect('home')  # Redirect to the home page after registration
-        except Exception as e:
-            # Print the error and add an error message
-            print(f"Error during user registration: {e}")
-            messages.error(request, 'An error occurred during registration. Please try again.')
 
+        user = Student.objects.create(name=username, email=email, password=password1)
+        user.save()
+        messages.success(request, 'Registration successful. You are now logged in.')
+        return redirect('notices')
+       
     return render(request, 'auth/register.html')    
