@@ -13,6 +13,14 @@ Login | NoticeBoard
                     <h3 class="text-center">Login</h3>
                 </div>
                 <div class="card-body">
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert {% if message.tags == 'error' %}alert-danger{% elif message.tags == 'success' %}alert-success{% endif %}"
+                        role="alert">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                    {% endif %}
                     <form method="post" action="{% url 'login' %}">
                         {% csrf_token %}
                         <div class="mb-3">

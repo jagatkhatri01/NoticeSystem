@@ -1,31 +1,32 @@
 from django.shortcuts import render, redirect   
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+from django.contrib import messages
 
-def signUp(request):
+def signup_view(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         email = request.POST.get('email')
         password = request.POST.get('pass1')
         confirm_password = request.POST.get('pass2')
 
-        # Basic validation
         if not (username and password and password == confirm_password):
-            return render(request, 'auth/register.html', {'error': 'Invalid input'})
+            messages.error(request, 'Invalid input')
+            return render(request, 'auth/register.html')
 
-        # Check if the username is already taken
         if User.objects.filter(username=username).exists():
-            return render(request, 'auth/register.html', {'error': 'Username is already taken'})
+            messages.error(request, 'Username is already taken')
+            return render(request, 'auth/register.html')
         
         if User.objects.filter(email=email).exists():
-            return render(request, 'auth/register.html', {'error': 'Email is already in use'})
-        # Create a new user
+            messages.error(request, 'Email is already in use')
+            return render(request, 'auth/register.html')
+
         user = User.objects.create_user(username=username, email=email, password=password)
-        # Log in the user
-        login(request, user)
-        return redirect('notices')  # Redirect to the home page after successful registration
+        messages.success(request, 'Registration successful. You can now log in.')
+        return redirect('login')
 
     return render(request, 'auth/register.html')
 
@@ -39,11 +40,15 @@ def login_view(request):
             login(request, user)
             return redirect('notices')
         else:
-            return render(request, 'auth/login.html', {'error': 'Invalid Input'})
+            messages.error(request, 'Invalid input')
     return render(request, 'auth/login.html')
 
-
 @login_required
-def demo(request):
-    return HttpResponse('This is index page')
+def profile_view(request):
+    user = request.user
+    context = {'user': user}
+    return render(request, 'profile.html', context)
 
+def logout_view(request):
+    logout(request)
+    return redirect('notices')

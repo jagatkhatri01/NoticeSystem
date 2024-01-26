@@ -1,4 +1,3 @@
-
 {% extends 'base.html' %}
 
 {% block title %}
@@ -6,44 +5,52 @@ Registration Form | Your Website
 {% endblock %}
 
 {% block content %}
-
-    <div class="signup-form">
-        <h2 class="text-center">Sign Up</h2>
-        {% if error %}
-        <p>{{ error }}</p>
-        {% endif %}
-        <form method="post" action="{% url 'register' %}">
-            {% csrf_token %}
-            <div class="form-group">
-                <label for="name">Name:</label>
-                <input type="text" class="form-control" id="name" name="username" placeholder="Enter your name" required>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center">Sign Up</h3>
+                </div>
+                <div class="card-body">
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert {% if message.tags == 'error' %}alert-danger{% elif message.tags == 'success' %}alert-success{% endif %}"
+                        role="alert">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    <form method="post" action="{% url 'signup' %}">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name:</label>
+                            <input type="text" class="form-control" id="name" name="username"
+                                placeholder="Enter your name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email address:</label>
+                            <input type="email" class="form-control" id="email" name="email"
+                                placeholder="Enter your email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password:</label>
+                            <input type="password" class="form-control" id="password" name="pass1"
+                                placeholder="Enter your password" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="confirmPassword" class="form-label">Confirm Password:</label>
+                            <input type="password" class="form-control" id="confirmPassword" name="pass2"
+                                placeholder="Confirm your password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+                    </form>
+                </div>
+                <div class="card-footer text-muted">
+                    <p class="text-center">Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="email">Email address:</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" class="form-control" id="password" name="pass1" placeholder="Enter your password" required>
-            </div>
-            <div class="form-group">
-                <label for="confirmPassword">Confirm Password:</label>
-                <input type="password" class="form-control" id="confirmPassword" name="pass2" placeholder="Confirm your password"
-                    required>
-            </div>
-            <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
-        </form>
+        </div>
     </div>
 </div>
-<style>
-    body {
-        background-color: #f8f9fa;
-    }
-
-    .signup-form {
-        width: 400px;
-        margin: 50px auto;
-    }
-</style>
-
 {% endblock %}
