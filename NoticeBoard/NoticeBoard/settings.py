@@ -89,7 +89,7 @@ with open('config.json') as config_file:
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'noticeDB',
+        'NAME': 'notice',
         'USER': config['DB_USER'],
         'PASSWORD': config['DB_PASSWORD'],
         'HOST': 'localhost',
@@ -97,7 +97,7 @@ DATABASES = {
     }
 }
 
-
+AUTH_USER_MODEL = "accounts.CustomUser" 
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators

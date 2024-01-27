@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect   
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.contrib import messages
+
+User = get_user_model()
 
 def signup_view(request):
     if request.method == 'POST':
@@ -47,7 +49,7 @@ def login_view(request):
 def profile_view(request):
     user = request.user
     context = {'user': user}
-    return render(request, 'profile.html', context)
+    return render(request, 'auth/profile.html', context)
 
 def logout_view(request):
     logout(request)

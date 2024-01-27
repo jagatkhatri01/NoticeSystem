@@ -1,10 +1,12 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator
 from django.http import HttpResponse
 from .models import Notice
 from django.db.models import Q
+from accounts.models import *
+from django.contrib.auth.decorators import user_passes_test, login_required
 
-# Create your views here.
+
 def noticesView(request):
     query = request.GET.get('search')
     notices = Notice.objects.order_by('-datetime')
@@ -28,3 +30,40 @@ def noticesView(request):
                 }
     return render(request, 'home.html', context)
 
+
+
+@login_required
+def add_notice(request):
+    if request.user.role == 'CR':
+        if request.method == 'POST':
+            title = request.POST.get('title')
+            content = request.POST.get('content')
+
+            if title and content:
+                author = request.user
+                notice = Notice.objects.create(title=title, content=content, author=author)
+                return redirect('notices')
+
+        return render(request, 'add_notice.html')
+    else:
+        return render(request, 'permission_denied.html') 
+
+
+@login_required
+def update_notice(request, notice_id):
+    notice = get_object_or_404(Notice, id=notice_id)
+
+    if request.user.role == 'CR' and request.user == notice.author:
+        if request.method == 'POST':
+            title = request.POST.get('title')
+            content = request.POST.get('content')
+
+            if title and content:
+                notice.title = title
+                notice.content = content
+                notice.save()
+                return redirect('notices')
+
+        return render(request, 'update_notice.html', {'notice': notice})
+    else:
+        return render(request, 'permission_denied.html')
