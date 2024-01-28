@@ -5,7 +5,7 @@ from .models import Notice
 from django.db.models import Q
 from accounts.models import *
 from django.contrib.auth.decorators import user_passes_test, login_required
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def noticesView(request):
     query = request.GET.get('search')
@@ -19,16 +19,49 @@ def noticesView(request):
             Q(tags__icontains=query)
         )
 
-    paginator = Paginator(notices, 5)
-    page_num = request.GET.get("page")
-    page_obj = paginator.get_page(page_num)
-    context = {'notices':notices,
-                'title':'College',
-                'site_name':'Notices',
-                'page_obj':page_obj,
-                'search_query':query
-                }
+    paginator = Paginator(notices, 6)
+    page_num = request.GET.get("page", 1)  # Default to page 1 if no page is specified
+    try:
+        page_obj = paginator.page(page_num)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        page_obj = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        page_obj = paginator.page(paginator.num_pages)
+
+    context = {
+        'notices': page_obj,  # Use the paginated queryset
+        'title': 'College',
+        'site_name': 'Notices',
+        'page_obj': page_obj,
+        'search_query': query
+    }
     return render(request, 'home.html', context)
+
+
+# def noticesView(request):
+#     query = request.GET.get('search')
+#     notices = Notice.objects.order_by('-datetime')
+
+#     if query:
+#         # Filter notices based on search query
+#         notices = notices.filter(
+#             Q(title__icontains=query) |
+#             Q(content__icontains=query) |
+#             Q(tags__icontains=query)
+#         )
+
+#     paginator = Paginator(notices, 5)
+#     page_num = request.GET.get("page")
+#     page_obj = paginator.get_page(page_num)
+#     context = {'notices':notices,
+#                 'title':'College',
+#                 'site_name':'Notices',
+#                 'page_obj':page_obj,
+#                 'search_query':query
+#                 }
+#     return render(request, 'home.html', context)
 
 
 def notice_detail(request, notice_id):
