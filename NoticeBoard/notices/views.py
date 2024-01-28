@@ -31,6 +31,9 @@ def noticesView(request):
     return render(request, 'home.html', context)
 
 
+def notice_detail(request, notice_id):
+    notice = get_object_or_404(Notice, pk=notice_id)
+    return render(request, 'notice_details.html', {'notice': notice})
 
 @login_required
 def add_notice(request):
