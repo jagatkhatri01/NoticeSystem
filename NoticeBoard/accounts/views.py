@@ -12,6 +12,8 @@ def signup_view(request):
         username = request.POST.get('username')
         email = request.POST.get('email')
         password = request.POST.get('pass1')
+        department = request.POST.get('department')
+        semester = request.POST.get('semester')
         confirm_password = request.POST.get('pass2')
 
         if not (username and password and password == confirm_password):
@@ -26,7 +28,7 @@ def signup_view(request):
             messages.error(request, 'Email is already in use')
             return render(request, 'auth/register.html')
 
-        user = User.objects.create_user(username=username, email=email, password=password)
+        user = User.objects.create_user(username=username, email=email, password=password, department=department, semester=semester)
         messages.success(request, 'Registration successful. You can now log in.')
         return redirect('login')
 

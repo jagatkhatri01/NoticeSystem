@@ -30,10 +30,12 @@
                     <!-- <li class="nav-item">
                         <a class="nav-link" href="#">Link</a>
                     </li> -->
-                    {% if user.is_authenticated and user.role == 'CR' %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'add_notice' %}">Add Notice</a>
-                    </li>
+                    {% if user.is_authenticated %}
+                        {% if user.role == 'CR' or user.role == 'dean' %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'add_notice' %}">Add Notice</a>
+                        </li>
+                        {% endif %}
                     {% endif %}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
