@@ -5,12 +5,7 @@
         "config": {"maxLambdaSize": "15mnb", "runtime": "python3.9"}
     }],
 
-    "routes": [
-        {
-            "src":"/(.*)",
-            "dest": "Notices/wsgi.py"
-        }
-    ],
+   
     "rewrites": [
         {"source": "/(.*)", "destination": "/"}
     ]
