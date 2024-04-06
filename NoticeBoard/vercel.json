@@ -10,5 +10,8 @@
             "src":"/(.*)",
             "dest": "Notices/wsgi.py"
         }
+    ],
+    "rewrites": [
+        {"source": "/(.*)", "destination": "/"}
     ]
 }
