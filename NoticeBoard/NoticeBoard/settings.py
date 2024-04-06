@@ -81,17 +81,14 @@ WSGI_APPLICATION = 'NoticeBoard.wsgi.app'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
-import json
 
-with open('config.json') as config_file:
-    config = json.load(config_file)
-
+import os
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'notice',
-        'USER': config['DB_USER'],
-        'PASSWORD': config['DB_PASSWORD'],
+        'USER': 'root',
+        'PASSWORD': '@pikashow1992',
         'HOST': 'localhost',
         'PORT': '3306',
     }
