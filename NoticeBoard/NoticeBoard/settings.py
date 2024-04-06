@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-dpfalrbl^asajvs3kt6^s6k4$e)z=)%$vx%kqu1!!w^2na4^f@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*', '.vercel.app']
 
 
 # Application definition
@@ -69,7 +69,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'NoticeBoard.wsgi.application'
+WSGI_APPLICATION = 'NoticeBoard.wsgi.app'
 
 
 # Database
