@@ -22,3 +22,8 @@ urlpatterns = [
     path('', include('notices.urls')),
     path('auth/', include('accounts.urls')),
 ]
+
+
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
