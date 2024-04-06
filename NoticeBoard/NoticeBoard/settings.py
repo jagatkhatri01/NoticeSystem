@@ -75,24 +75,24 @@ WSGI_APPLICATION = 'NoticeBoard.wsgi.app'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
-import os
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'notice',
-        'USER': 'root',
-        'PASSWORD': '@pikashow1992',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+import os
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'notice',
+#         'USER': 'root',
+#         'PASSWORD': '@pikashow1992',
+#         'HOST': 'localhost',
+#         'PORT': '3306',
+#     }
+# }
 
 AUTH_USER_MODEL = "accounts.CustomUser" 
 
@@ -136,9 +136,7 @@ EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
 
 
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "ui/static")]
-STATIC_URL = "static/"
-STATIC_ROOT = os.path.join(BASE_DIR, "ui/staticfiles")
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
