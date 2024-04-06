@@ -7,4 +7,4 @@ class CustomUser(AbstractUser):
     # forget_password_token = models.CharField(max_length=100)
     role = models.CharField(max_length=10, choices=[('member', 'Member'), ('CR', 'Class Representative'), ('dean', 'Dean')], default='member')
     department = models.CharField(max_length=50)
-    semester = models.IntegerField()
+    semester = models.IntegerField(default=1)

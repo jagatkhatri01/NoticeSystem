@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-dpfalrbl^asajvs3kt6^s6k4$e)z=)%$vx%kqu1!!w^2na4^f@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1", ".vercel.app", ".now.sh"]
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -69,7 +69,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'NoticeBoard.wsgi.app'
+WSGI_APPLICATION = 'NoticeBoard.wsgi.application'
 
 
 # Database
@@ -93,6 +93,8 @@ import os
 #         'PORT': '3306',
 #     }
 # }
+
+STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = "accounts.CustomUser" 
 
