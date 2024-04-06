@@ -19,8 +19,17 @@ Update Notice | Your Website
                 <textarea name="content" required class="form-control mb-3">{{ notice.content }}</textarea>
 
                 <button type="submit" class="btn btn-primary">Update</button>
+
+                {% if user.is_authenticated %}
+                {% if user.role == 'CR' or user.role == 'dean' %}
+                <!-- Delete button -->
+                <a href="{% url 'delete_notice' notice.id %}" class="btn btn-danger ml-2"
+                >Delete Notice</a>
+                {% endif %}
+                {% endif %}
             </form>
         </div>
     </div>
 </div>
+
 {% endblock %}

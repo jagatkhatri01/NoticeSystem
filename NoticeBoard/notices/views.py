@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator
-from django.http import HttpResponse
+from django.contrib import messages
 from .models import Notice
 from django.db.models import Q
 from accounts.models import *
@@ -92,6 +92,7 @@ def update_notice(request, notice_id):
         return render(request, 'update_notice.html', {'notice': notice})
     else:
         return render(request, 'permission_denied.html')
+from django.http import HttpResponseBadRequest
 
 @login_required
 def delete_notice(request, notice_id):
@@ -100,6 +101,12 @@ def delete_notice(request, notice_id):
     if request.user.role in ['CR', 'dean'] and request.user == notice.author:
         if request.method == 'POST':
             notice.delete()
+            messages.success(request, 'Notice deleted successfully.')
             return redirect('notices')
     else:
-        return render(request, 'permission_denied.html')
+        messages.error(request, 'You do not have permission to delete this notice.')
+        return redirect('permission_denied')
+
+    # If the request method is not POST
+    return HttpResponseBadRequest("Invalid request method")
+

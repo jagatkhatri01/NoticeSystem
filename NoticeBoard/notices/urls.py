@@ -7,5 +7,6 @@ urlpatterns = [
     path('notice/<int:notice_id>/', notice_detail, name='notice_detail'),
     path('add_notice/', add_notice, name='add_notice'),
     path('update_notice/<int:notice_id>/', update_notice, name='update_notice'),
+    path('delete_notice/<int:notice_id>/', delete_notice, name='delete_notice'),
    
 ]
