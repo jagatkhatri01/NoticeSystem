@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-dpfalrbl^asajvs3kt6^s6k4$e)z=)%$vx%kqu1!!w^2na4^f@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -99,11 +99,11 @@ import os
 
 STATIC_URL = '/static/'
 
-# STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-STATICFILES_DIRS = [
-    BASE_DIR / 'staticfiles'
-]
+# STATICFILES_DIRS = [
+#     BASE_DIR / 'staticfiles'
+# ]
 
 
 AUTH_USER_MODEL = "accounts.CustomUser" 
