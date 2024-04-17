@@ -1,0 +1,17 @@
+/* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #dfc7c7;
+    color: #3d0909;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    color: #007bff;
+}
+
+p{
+    color:#c94242;
+}

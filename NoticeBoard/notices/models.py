@@ -7,7 +7,7 @@ class Notice(models.Model):
     content = models.TextField()
     datetime = models.DateTimeField(default=timezone.now)
     tags = models.CharField(max_length=50)
-    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE, default=1)
+    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
    
     
     def __str__(self) -> str:

@@ -8,6 +8,9 @@ from django.contrib.auth.decorators import user_passes_test, login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth import get_user_model
 
+def checkstatic(request):
+    return render(request, 'index.html')
+
 def noticesView(request):
     query = request.GET.get('search')
     user = request.user
