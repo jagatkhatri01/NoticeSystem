@@ -1,0 +1,46 @@
+/* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-image: linear-gradient(to right, #a3b7d4, #a3b7d4);
+    color: #212529;
+}
+
+.container {
+    margin-top: 5rem;
+}
+
+.card {
+    background-color: rgba(131, 159, 183, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+    color: #333;
+}
+
+.card-text {
+    color: #666;
+}
+
+.btn-primary {
+    background-color: #6c93b7;
+    border-color: #6c93b7;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #4d7296;
+    border-color: #4d7296;
+}
+
+.pagination {
+    margin-top: 2rem;
+}
+
+.pagination .page-link {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
